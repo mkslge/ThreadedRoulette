@@ -5,8 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Roulette
         server/server.cpp
-        client/client.cpp
         color.cpp
         color.h
         outcome.cpp
-        outcome.h)
+        outcome.h
+        Utility/utility.cpp
+        Utility/utility.h)
