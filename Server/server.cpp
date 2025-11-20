@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+
+#include "../messenger.h"
 #include "../outcome.h"
 
 
@@ -16,9 +18,12 @@ Outcome global_winning_outcome;
 std::vector<std::thread> global_comms;
 int main() {
     std::cout << "Starting server..." << std::endl;
-
+    Messenger messenger;
+    messenger.receive();
+    return 0;
     //main game loop
     while (true) {
+
         //here we want server
         //if new player, joins, we handle that in a new thread
         std:: cout << "Spinning wheel..." << std::endl;

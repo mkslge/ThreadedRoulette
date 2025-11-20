@@ -21,11 +21,10 @@ sockaddr_in Utility::init_thread_addr(int port) {
     if (sendto(sockfd, str, strlen(str), 0, (struct sockaddr*)&dest, sizeof(dest)) < 0) {
         std::cout << "Error sending message." << std::endl;
         return dest;
-    } else {
-        std::cout << "Message sent and initalized.";
     }
 
 
+    std::cout << "Message sent and initalized.";
 
     return dest;
 }
