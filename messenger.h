@@ -5,7 +5,7 @@
 #ifndef MESSAGER_H
 #define MESSAGER_H
 #include <netinet/in.h>
-
+#include <string>
 
 class Messenger {
 private:
@@ -20,8 +20,10 @@ private:
 public:
     Messenger();
     Messenger(sockaddr_in dest, int port_number);
-    void receive();
+    std::string receive();
+    std::string receive_no_wait();
     void send(const char* message);
+
     int get_port_number() const;
 
 

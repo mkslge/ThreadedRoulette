@@ -36,7 +36,7 @@ Messenger::Messenger() {
 }
 
 
-void Messenger::receive() {
+std::string Messenger::receive() {
     if (bind(socket_fd, (struct sockaddr*)&server, sizeof(server)) < 0) {
         perror("Bind failed");
         exit(EXIT_FAILURE);
@@ -47,7 +47,8 @@ void Messenger::receive() {
         MSG_WAITALL, (struct sockaddr*) &client, &client_length);
 
     buffer[client_message_size] = '\0';
-    std:: cout << "Received " << buffer << std::endl;
+
+    return this->buffer;
 }
 
 void Messenger::send(const char* message) {
@@ -63,6 +64,30 @@ void Messenger::send(const char* message) {
 
     std::cout << "Sent " << bytes_sent << " bytes: " << message << std::endl;
 }
+
+
+std::string Messenger::receive_no_wait() {
+    std::string message;
+    struct timeval tv{0,0};
+
+    fd_set fds;
+    FD_ZERO(&fds);
+    FD_SET(this->socket_fd, &fds);
+
+    int ret = select(this->socket_fd + 1, &fds,NULL, NULL, &tv);
+
+    if (ret > 0) {
+        recv(this->socket_fd, buffer, sizeof(buffer), 0);
+    } else {
+        std::cout << "No message ):" << std::endl;
+    }
+
+
+
+    return this->buffer;
+
+}
+
 
 int Messenger::get_port_number() const {
     return port_number;
