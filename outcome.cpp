@@ -23,3 +23,7 @@ bool Outcome::operator==(Outcome other) {
 Outcome Outcome::generate_random_outcome() {
     return {Color::GREEN, -1};
 }
+
+std::string Outcome::to_string() {
+    return "Color: " + color_to_string(color) + ", Value: " + std::to_string(value);
+}

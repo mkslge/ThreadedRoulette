@@ -1,10 +1,13 @@
 //
 // Created by Mark on 11/9/25.
 //
-#include <utility>
-#include "color.h"
+
 #ifndef OUTCOME_H
 #define OUTCOME_H
+
+#include <string>
+#include <utility>
+#include "color.h"
 
 class Outcome {
 private:
@@ -23,6 +26,8 @@ public:
     int get_value();
 
     bool operator==(Outcome other);
+
+    std::string to_string();
 
 
 
