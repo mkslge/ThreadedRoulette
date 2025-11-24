@@ -11,6 +11,10 @@ int main() {
     std::cout << "Sending message..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1));
     messenger.send("JOINING");
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    messenger.send("E");
+
+
 
     return 0;
 }
