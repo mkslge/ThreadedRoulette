@@ -7,12 +7,19 @@
 
 #include <string>
 #include <utility>
+#include <random>
+#include <ctime>
+#include <cstdlib>
 #include "color.h"
+
+
 
 class Outcome {
 private:
     Color color;
     int value;
+
+
 
 public:
     static Outcome generate_random_outcome();

@@ -20,6 +20,7 @@
 Outcome global_winning_outcome;
 std::vector<std::thread> global_comms;
 int main() {
+    srand(time(0));
     std::cout << "Starting server..." << std::endl;
     Messenger messenger(SERVER);
     //messenger.receive();
@@ -37,7 +38,7 @@ int main() {
         std:: cout << "Spinning wheel..." << std::endl;
         global_winning_outcome = Outcome::generate_random_outcome();
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
-
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 
     }
 
