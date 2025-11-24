@@ -1,15 +1,25 @@
 //
 // Created by Mark on 11/9/25.
 //
-#include <utility>
-#include "color.h"
+
 #ifndef OUTCOME_H
 #define OUTCOME_H
+
+#include <string>
+#include <utility>
+#include <random>
+#include <ctime>
+#include <cstdlib>
+#include "color.h"
+
+
 
 class Outcome {
 private:
     Color color;
     int value;
+
+
 
 public:
     static Outcome generate_random_outcome();
@@ -23,6 +33,8 @@ public:
     int get_value();
 
     bool operator==(Outcome other);
+
+    std::string to_string();
 
 
 

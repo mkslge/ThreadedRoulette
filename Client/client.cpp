@@ -7,10 +7,10 @@
 #include <chrono>
 #include <thread>
 int main() {
-    Messenger messenger;
+    Messenger messenger(CLIENT);
     std::cout << "Sending message..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    messenger.send("secret message");
+    messenger.send("JOINING");
 
     return 0;
 }

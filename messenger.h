@@ -7,6 +7,9 @@
 #include <netinet/in.h>
 #include <string>
 
+
+enum MessageRole{CLIENT, SERVER};
+
 class Messenger {
 private:
     sockaddr_in server;
@@ -18,11 +21,12 @@ private:
     socklen_t client_length;
 
 public:
-    Messenger();
+    Messenger(MessageRole role);
     Messenger(sockaddr_in dest, int port_number);
     std::string receive();
     std::string receive_no_wait();
-    void send(const char* message);
+    bool send(const char* message);
+    void send_to_client(const char* message);
 
     int get_port_number() const;
 

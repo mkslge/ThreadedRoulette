@@ -14,7 +14,7 @@
 //Messenger::Messenger(sockaddr_in dest, int port_number) : dest(dest) , port_number(port_number){}
 
 
-Messenger::Messenger() {
+Messenger::Messenger(MessageRole role) {
     this->socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (this->socket_fd < 0) {
         perror("Socket creation failed...");
@@ -27,6 +27,12 @@ Messenger::Messenger() {
     this->server.sin_port = htons(8080);
 
     this->client_length = sizeof(client);
+    if (role == SERVER) {
+        if (bind(socket_fd, (struct sockaddr*)&server, sizeof(server)) < 0) {
+            perror("Bind failed");
+            exit(EXIT_FAILURE);
+        }
+    }
 
     /*int client_message_size = recvfrom(socket_fd, (char*) buffer, sizeof(buffer),
         MSG_WAITALL, (struct sockaddr*) &client, &client_length);
@@ -37,37 +43,16 @@ Messenger::Messenger() {
 
 
 std::string Messenger::receive() {
-    if (bind(socket_fd, (struct sockaddr*)&server, sizeof(server)) < 0) {
-        perror("Bind failed");
-        exit(EXIT_FAILURE);
-    }
 
-
-    int client_message_size = recvfrom(socket_fd, (char*) buffer, sizeof(buffer),
+    int client_message_size = recvfrom(socket_fd, buffer, sizeof(buffer),
         MSG_WAITALL, (struct sockaddr*) &client, &client_length);
 
     buffer[client_message_size] = '\0';
 
-    return this->buffer;
+    return std::string(this->buffer);
 }
-
-void Messenger::send(const char* message) {
-    ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
-        ,0 , (const struct sockaddr*) &server, sizeof(server));
-
-
-    if (bytes_sent < 0) {
-        perror("Sending message failed");
-        close(socket_fd);
-        exit(EXIT_FAILURE);
-    }
-
-    std::cout << "Sent " << bytes_sent << " bytes: " << message << std::endl;
-}
-
 
 std::string Messenger::receive_no_wait() {
-    std::string message;
     struct timeval tv{0,0};
 
     fd_set fds;
@@ -76,17 +61,56 @@ std::string Messenger::receive_no_wait() {
 
     int ret = select(this->socket_fd + 1, &fds,NULL, NULL, &tv);
 
+
     if (ret > 0) {
-        recv(this->socket_fd, buffer, sizeof(buffer), 0);
+
+        ssize_t message_length = recvfrom(socket_fd, buffer, sizeof(buffer) - 1,
+        0, (struct sockaddr*)&client, &client_length);
+
+        if (message_length < 0) {
+            perror("Recv failed...");
+            return "";
+        }
+
+        buffer[message_length] = '\0';
+    } else if (ret == 0) {
+        return "No message ):";
     } else {
-        std::cout << "No message ):" << std::endl;
+        perror("Select failed...");
+        return "";
     }
 
 
 
-    return this->buffer;
+
+    return std::string(this->buffer);
 
 }
+
+bool Messenger::send(const char* message) {
+    ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
+        ,0 , (const struct sockaddr*) &server, sizeof(server));
+
+
+    if (bytes_sent < 0) {
+        perror("Sending message failed");
+        close(socket_fd);
+        return false;
+    }
+
+    std::cout << "Sent " << bytes_sent << " bytes: " << message << std::endl;
+    return true;
+}
+
+void Messenger::send_to_client(const char* message) {
+    ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
+        ,0 , (const struct sockaddr*) &client, sizeof(client));
+
+    std::cout << "Sent message to client: " << message << std::endl;
+}
+
+
+
 
 
 int Messenger::get_port_number() const {

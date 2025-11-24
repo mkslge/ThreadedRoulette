@@ -20,13 +20,13 @@
 Outcome global_winning_outcome;
 std::vector<std::thread> global_comms;
 int main() {
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    srand(time(0));
     std::cout << "Starting server..." << std::endl;
-    Messenger messenger;
+    Messenger messenger(SERVER);
     //messenger.receive();
-    std::cout << "Received message: " << messenger.receive_no_wait() << std::endl;
+    //std::cout << "Received message: " << messenger.receive_no_wait() << std::endl;
 
-
+    //return 0;
     //main game loop
     while (true) {
         if (messenger.receive_no_wait() == "JOINING") {
@@ -37,7 +37,8 @@ int main() {
         //if new player, joins, we handle that in a new thread
         std:: cout << "Spinning wheel..." << std::endl;
         global_winning_outcome = Outcome::generate_random_outcome();
-        std::cout << "Spun wheel" << std::endl;
+        std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 
     }
 
