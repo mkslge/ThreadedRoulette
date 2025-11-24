@@ -11,14 +11,9 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include "../messenger.h"
 
-
-class Utility {
-public:
-    static sockaddr_in init_thread_addr(int port);
-
-
-};
+void init_thread(Messenger server);
 
 
 

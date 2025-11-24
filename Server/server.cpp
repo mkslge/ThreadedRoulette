@@ -15,10 +15,11 @@
 
 #include "../messenger.h"
 #include "../outcome.h"
+#include "../Utility/utility.h"
 
 
 Outcome global_winning_outcome;
-std::vector<std::thread> global_comms;
+std::vector<std::thread> threads;
 int main() {
     srand(time(0));
     std::cout << "Starting server..." << std::endl;
@@ -32,6 +33,7 @@ int main() {
         if (messenger.receive_no_wait() == "JOINING") {
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
+            threads.emplace_back(std::thread(&init_thread, messenger));
         }
         //here we want server
         //if new player, joins, we handle that in a new thread
