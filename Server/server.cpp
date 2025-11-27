@@ -16,6 +16,7 @@
 #include "../messenger.h"
 #include "../outcome.h"
 #include "../Utility/utility.h"
+#include "../Utility/OperationCodes.h"
 
 
 Outcome global_winning_outcome;
@@ -30,7 +31,7 @@ int main() {
     //return 0;
     //main game loop
     while (true) {
-        if (messenger.receive_no_wait() == "JOINING") {
+        if (messenger.receive_no_wait() == OperationCodes::get_join_code()) {
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
             threads.emplace_back(std::thread(&init_thread, messenger));
