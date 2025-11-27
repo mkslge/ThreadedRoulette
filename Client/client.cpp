@@ -4,15 +4,20 @@
 #include <iostream>
 
 #include "../messenger.h"
+#include "../Utility/OperationCodes.h"
 #include <chrono>
 #include <thread>
+
+
+
 int main() {
     Messenger messenger(CLIENT);
     std::cout << "Sending message..." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    messenger.send("JOINING");
+    messenger.send(OperationCodes::get_join_code());
     std::this_thread::sleep_for(std::chrono::seconds(5));
-    messenger.send("E");
+    messenger.send(OperationCodes::get_exit_code());
+    std::cout << messenger.receive() << std::endl;
 
 
 

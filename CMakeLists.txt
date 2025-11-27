@@ -14,7 +14,10 @@ set(SHARED_SOURCES color.cpp
         roulette.cpp
         roulette.h
         receiver.cpp
-        receiver.h)
+        receiver.h
+        Utility/OperationCodes.cpp
+        Utility/OperationCodes.h
+)
 
 add_executable(Server
         Server/server.cpp
@@ -24,4 +27,6 @@ add_executable(Server
 add_executable(Client
         Client/client.cpp
         ${SHARED_SOURCES}
+        Utility/OperationCodes.cpp
+        Utility/OperationCodes.h
 )

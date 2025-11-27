@@ -26,7 +26,7 @@ public:
     std::string receive();
     std::string receive_no_wait();
     bool send(const char* message);
-    void send_to_client(const char* message);
+    bool send_to_client(const char* message);
 
     int get_port_number() const;
 
