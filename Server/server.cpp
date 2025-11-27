@@ -14,10 +14,10 @@
 #include <thread>
 
 #include "../messenger.h"
-#include "../outcome.h"
+#include "../Models/outcome.h"
 #include "../Utility/utility.h"
 #include "../Utility/OperationCodes.h"
-
+#include "../Utility/threadutil.h"
 
 Outcome global_winning_outcome;
 std::vector<std::thread> threads;
@@ -25,10 +25,7 @@ int main() {
     srand(time(0));
     std::cout << "Starting server..." << std::endl;
     Messenger messenger(SERVER);
-    //messenger.receive();
-    //std::cout << "Received message: " << messenger.receive_no_wait() << std::endl;
 
-    //return 0;
     //main game loop
     while (true) {
         if (messenger.receive_no_wait() == OperationCodes::get_join_code()) {
@@ -41,7 +38,7 @@ int main() {
         std:: cout << "Spinning wheel..." << std::endl;
         global_winning_outcome = Outcome::generate_random_outcome();
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(10));
 
     }
 
