@@ -10,16 +10,21 @@
  * BET : <COLOR><VALUE>_<AMOUNT>
  *
  */
-void init_thread(Messenger server) {
 
-    while (true) {
-        std::string received_message = server.receive_no_wait();
-        if (received_message == "E") {
-            server.send_to_client("Ended");
-            std::cout << "Thread life ended ): goodbye world..." << std::endl;
-            return;
-        }
-    }
+
+bool is_bet_command(const std::string &cmd) {
+    return cmd[0] == 'B';
 }
 
+std::string create_bet_message(int bet_amount, std::string color) {
+    return "B" + std::to_string(bet_amount) + color;
+}
 
+std::string string_to_lower(std::string) {
+    return "";
+}
+
+bool is_valid_color_command(std::string &color) {
+    //std::string lowercase_color = std::tolower(color);
+    return color == "R" || color == "B" || color == "G";
+}

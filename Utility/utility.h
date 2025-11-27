@@ -12,9 +12,14 @@
 #define UTILITY_H
 
 #include "../messenger.h"
-
-void init_thread(Messenger server);
-
+#include <string>
 
 
+bool is_bet_command(const std::string &cmd);
+
+std::string create_bet_message(int bet_amount, std::string color);
+
+std::string string_to_lower(std::string);
+
+bool is_valid_color_command(std::string &color);
 #endif //UTILITY_H
