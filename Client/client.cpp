@@ -16,6 +16,7 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "Attempting to join server..." << std::endl;
     messenger.send(OperationCodes::get_join_code());
+    int amount = 100;
     while (true) {
         std::string command;
         std::cout << "Type E to exit, or B to bet: " << std::endl;

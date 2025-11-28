@@ -29,4 +29,6 @@ add_executable(Client
         Utility/OperationCodes.h
         Utility/threadutil.cpp
         Utility/threadutil.h
+        Client/clientinfo.cpp
+        Client/clientinfo.h
 )
