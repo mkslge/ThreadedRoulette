@@ -17,9 +17,7 @@
 #include <cctype>
 
 std::string string_to_lower(std::string);
-bool is_bet_command(const std::string &cmd);
-bool is_valid_color_command(std::string &color);
-std::string create_bet_message(int bet_amount, const std::string& color);
+
 
 
 
