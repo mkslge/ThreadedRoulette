@@ -15,11 +15,12 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <vector>
+#include <sstream>
 
 std::string string_to_lower(std::string);
-bool is_bet_command(const std::string &cmd);
-bool is_valid_color_command(std::string &color);
-std::string create_bet_message(int bet_amount, const std::string& color);
+
+std::vector<std::string> split_string(const std::string&, char delim);
 
 
 

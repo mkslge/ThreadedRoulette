@@ -31,4 +31,6 @@ add_executable(Client
         Utility/threadutil.h
         Client/clientinfo.cpp
         Client/clientinfo.h
+        Models/bet.cpp
+        Models/bet.h
 )
