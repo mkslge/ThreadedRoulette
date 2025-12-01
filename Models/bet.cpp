@@ -23,15 +23,7 @@ bet::bet(int amount, const std::string &color) {
     this->color = color;
 }
 
-/* Function checks if the color string indicates a valid roulette color
- * (e.g. red black or green)
- *
- *
- */
-bool bet::valid_bet_color(std::string &color) {
-    std::string lc_color = string_to_lower(color);
-    return !lc_color.empty() && (lc_color == "r" || lc_color == "b" || lc_color == "g");
-}
+
 
 
 
@@ -61,7 +53,7 @@ std::string bet::prompt_bet_color() {
     while (true) {
         std::string color;
         std::cin >> color;
-        if (this->valid_bet_color(color)) {
+        if (valid_bet_color(color)) {
             this->color = color;
             return color;
         }
@@ -90,8 +82,18 @@ static bool valid_bet_amount(int bet_amount) {
     return bet_amount >= MIN_BET_AMOUNT && bet_amount <= MAX_BET_AMOUNT;
 }
 
+/* Function checks if the color string indicates a valid roulette color
+ * (e.g. red black or green)
+ *
+ *
+ */
+static bool valid_bet_color(std::string &color) {
+    std::string lc_color = string_to_lower(color);
+    return !lc_color.empty() && (lc_color == "r" || lc_color == "b" || lc_color == "g");
+}
 
-bet bet::encode_bet_string(std::string bet_string) {
+
+static bet encode_bet_string(std::string bet_string) {
     std::vector<std::string> split_bet_string = split_string(bet_string, ' ');
     if (split_bet_string.size() < 3) {
         return bet();
@@ -103,8 +105,8 @@ bet bet::encode_bet_string(std::string bet_string) {
 
 
     if (is_bet_command(p_bet_cmd)
-        && valid_bet_amount(std::stoi(p_amount)
-        && valid_bet_color(p_color))) {
+        && valid_bet_amount(std::stoi(p_amount))
+        && valid_bet_color(p_color)) {
         return bet(std::stoi(p_amount), p_color);
     }
     return bet();
