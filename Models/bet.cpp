@@ -4,9 +4,18 @@
 
 #include "bet.h"
 
-
 bet::bet() {
 
+}
+
+bet::bet(clientinfo client) {
+    this->client = client;
+}
+
+bet::bet(int amount, const std::string &color, clientinfo client) {
+    this->amount = amount;
+    this->color = color;
+    this->client = client;
 }
 
 bet::bet(int amount, const std::string &color) {
@@ -25,21 +34,6 @@ bool bet::valid_bet_color(std::string &color) {
 }
 
 
-/*
- * Precondition: Assumes string is non-null, and has been lowercased.
- * Result: Returns true if string is a valid bet command (aka does it start with B)
- */
-bool bet::is_bet_command(const std::string &cmd) {
-    return !cmd.empty() && cmd[0] == 'b';
-}
-
-
-/* Encodes bet into format b <AMOUNT> <COLOR CODE>
- */
-std::string bet::create_bet_code() {
-    return string_to_lower("b " + std::to_string(this->amount) + " " + this->color);
-}
-
 
 
 int bet::prompt_bet_amount() {
@@ -56,9 +50,11 @@ int bet::prompt_bet_amount() {
 }
 
 
-bool bet::valid_bet_amount(int bet_amount) {
-    return bet_amount >= MIN_BET_AMOUNT && bet_amount <= MAX_BET_AMOUNT;
+bool bet::valid_and_funded_bet(int bet_amount) {
+    return bet_amount >= MIN_BET_AMOUNT && bet_amount <= MAX_BET_AMOUNT && this->client.sufficient_balance(bet_amount);
 }
+
+
 
 std::string bet::prompt_bet_color() {
 
@@ -72,3 +68,47 @@ std::string bet::prompt_bet_color() {
     }
     return "";
 }
+
+
+/* Encodes bet into format b <AMOUNT> <COLOR CODE>
+ */
+std::string bet::create_bet_code() {
+    return string_to_lower("b " + std::to_string(this->amount) + " " + this->color);
+}
+
+
+
+/*
+ * Precondition: Assumes string is non-null, and has been lowercased.
+ * Result: Returns true if string is a valid bet command (aka does it start with B)
+ */
+static bool is_bet_command(const std::string &cmd) {
+    return !cmd.empty() && cmd[0] == 'b';
+}
+
+static bool valid_bet_amount(int bet_amount) {
+    return bet_amount >= MIN_BET_AMOUNT && bet_amount <= MAX_BET_AMOUNT;
+}
+
+
+bet bet::encode_bet_string(std::string bet_string) {
+    std::vector<std::string> split_bet_string = split_string(bet_string, ' ');
+    if (split_bet_string.size() < 3) {
+        return bet();
+    }
+    std::string p_bet_cmd = split_bet_string[0];
+    std::string p_amount = split_bet_string[1];
+    std::string p_color = split_bet_string[2];
+
+
+
+    if (is_bet_command(p_bet_cmd)
+        && valid_bet_amount(std::stoi(p_amount)
+        && valid_bet_color(p_color))) {
+        return bet(std::stoi(p_amount), p_color);
+    }
+    return bet();
+
+}
+
+

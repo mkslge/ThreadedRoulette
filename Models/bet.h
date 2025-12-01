@@ -7,28 +7,43 @@
 #include <string>
 #include <iostream>
 #include "../Utility/utility.h"
+#include "../Client/clientinfo.h"
 
-int MAX_BET_AMOUNT = 1000;
-int MIN_BET_AMOUNT = 1;
+inline int MAX_BET_AMOUNT = 1000;
+inline int MIN_BET_AMOUNT = 1;
 
 
 class bet {
 private:
-    bool valid_bet_amount(int bet_amount);
-public:
-    bet();
-    bet(int amount, const std::string &color);
-    std::string create_bet_code();
 
-    bool valid_bet_color(std::string &color);
-    bool is_bet_command(const std::string &cmd);
+public:
+    bet(clientinfo client);
+    bet(int amount, const std::string &color, clientinfo client);
+    bet(int amount, const std::string &color);
+    bet();
+
+
+
+
     int prompt_bet_amount();
+
+    bool valid_and_funded_bet(int bet_amount);
+
     std::string prompt_bet_color();
+
+    std::string create_bet_code();
+    static bet encode_bet_string(std::string bet_string);
+    static bool is_bet_command(const std::string &cmd);
+    static bool valid_bet_color(std::string &color);
+    static bool valid_bet_amount(int amount);
+
+
 
 
 private:
     int amount;
     std::string color;
+    clientinfo client;
 
 };
 

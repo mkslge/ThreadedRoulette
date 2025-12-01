@@ -15,9 +15,12 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <vector>
+#include <sstream>
 
 std::string string_to_lower(std::string);
 
+std::vector<std::string> split_string(const std::string&, char delim);
 
 
 
