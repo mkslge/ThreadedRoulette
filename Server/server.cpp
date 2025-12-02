@@ -16,11 +16,15 @@
 #include "../messenger.h"
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
+#include  "../Utility/threadutil.h"
 #include "../Utility/OperationCodes.h"
-#include "../Utility/threadutil.h"
 
-Outcome global_winning_outcome;
-std::vector<std::thread> threads;
+
+
+
+
+
+
 int main() {
     srand(time(0));
     std::cout << "Starting server..." << std::endl;
@@ -28,10 +32,10 @@ int main() {
 
     //main game loop
     while (true) {
-        if (messenger.receive_no_wait() == OperationCodes::get_join_code()) {
+        if (is_join_message(messenger.receive_no_wait())) {
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
-            threads.emplace_back(std::thread(&init_thread, messenger));
+            threads.emplace_back(&init_thread, messenger);
         }
         //here we want server
         //if new player, joins, we handle that in a new thread

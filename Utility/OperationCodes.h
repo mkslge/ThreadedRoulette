@@ -9,14 +9,15 @@
 
 class OperationCodes {
 public:
-    static const char* EXIT_CODE;
-    static const char* JOIN_CODE;
+    static char EXIT_CODE;
+    static char JOIN_CODE;
+    static char BET_CODE;
 private:
     OperationCodes();
 public:
-    const static char* get_exit_code();
-    const static char* get_join_code();
-
+    static char get_exit_code();
+    static char get_join_code();
+    static char get_bet_code();
 };
 
 
