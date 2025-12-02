@@ -4,19 +4,26 @@
 
 #include "OperationCodes.h"
 
-const char* OperationCodes::EXIT_CODE = nullptr;
-const char* OperationCodes::JOIN_CODE = nullptr;
+char OperationCodes::EXIT_CODE = 'e';
+char OperationCodes::JOIN_CODE = 'j';
+char OperationCodes::BET_CODE = 'b';
 
-const char *OperationCodes::get_exit_code() {
-    if (!EXIT_CODE) {
-        EXIT_CODE = "E";
-    }
+OperationCodes::OperationCodes() {
+
+}
+
+
+
+char OperationCodes::get_exit_code() {
     return EXIT_CODE;
 }
 
-const char *OperationCodes::get_join_code() {
-    if (!JOIN_CODE) {
-        JOIN_CODE = "J";
-    }
+char OperationCodes::get_join_code() {
+
     return JOIN_CODE;
+}
+
+char OperationCodes::get_bet_code() {
+
+    return BET_CODE;
 }

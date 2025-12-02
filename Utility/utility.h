@@ -17,12 +17,15 @@
 #include <cctype>
 #include <vector>
 #include <sstream>
-
+#include <map>
+#include "../Models/color.h"
+#include "OperationCodes.h"
 std::string string_to_lower(std::string);
 
 std::vector<std::string> split_string(const std::string&, char delim);
 
+std::map<char, Color> get_outcome_map();
 
-
-
+bool is_join_message(std::string msg);
+bool is_exit_message(std::string msg);
 #endif //UTILITY_H

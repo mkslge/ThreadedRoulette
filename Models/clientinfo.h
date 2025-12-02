@@ -5,7 +5,9 @@
 #ifndef CLIENTINFO_H
 #define CLIENTINFO_H
 
-int DEFAULT_STARTING_BALANCE = 100;
+
+
+inline int DEFAULT_STARTING_BALANCE = 100;
 
 class clientinfo {
     int balance;

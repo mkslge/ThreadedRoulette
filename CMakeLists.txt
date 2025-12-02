@@ -3,23 +3,38 @@ project(Roulette)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SHARED_SOURCES Models/color.cpp
+set(SHARED_SOURCES
+
+        Models/color.cpp
         Models/color.h
+
         Models/outcome.cpp
         Models/outcome.h
+
+        Models/bet.cpp
+        Models/bet.h
+
+        Models/clientinfo.cpp
+        Models/clientinfo.h
+
         Utility/utility.cpp
         Utility/utility.h
+
         messenger.cpp
         messenger.h
+
         Utility/OperationCodes.cpp
         Utility/OperationCodes.h
+
         Utility/threadutil.cpp
         Utility/threadutil.h
+
 )
 
 add_executable(Server
         Server/server.cpp
         ${SHARED_SOURCES}
+
 )
 
 add_executable(Client
@@ -29,8 +44,8 @@ add_executable(Client
         Utility/OperationCodes.h
         Utility/threadutil.cpp
         Utility/threadutil.h
-        Client/clientinfo.cpp
-        Client/clientinfo.h
+        Models/clientinfo.cpp
+        Models/clientinfo.h
         Models/bet.cpp
         Models/bet.h
 )
