@@ -12,6 +12,11 @@ Outcome::Outcome() : color(Color::GREEN), value(-1) {
 }
 
 
+Outcome::Outcome(const Outcome& other) {
+    this->color = other.color;
+    this->value = other.value;
+}
+
 Color Outcome::get_color() {
     return color;
 }

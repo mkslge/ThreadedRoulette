@@ -12,12 +12,16 @@ public:
     static char EXIT_CODE;
     static char JOIN_CODE;
     static char BET_CODE;
+    static char WIN_CODE;
+    static char LOSS_CODE;
 private:
     OperationCodes();
 public:
     static char get_exit_code();
     static char get_join_code();
     static char get_bet_code();
+    static char get_win_code();
+    static char get_loss_code();
 };
 
 

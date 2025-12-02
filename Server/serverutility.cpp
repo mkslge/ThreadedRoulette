@@ -2,13 +2,13 @@
 // Created by Mark on 11/27/25.
 //
 
-#include "threadutil.h"
+#include "serverutility.h"
 #include <thread>
 
 void init_thread(Messenger server) {
     std::cout << "Starting up thread..." << std::endl;
     clientinfo client = clientinfo();
-
+    const char* response;
     while (true) {
         std::string received_message = server.receive_no_wait();
         if (is_exit_message(received_message)) {
@@ -20,10 +20,21 @@ void init_thread(Messenger server) {
             bet curr_bet = bet::encode_bet_string(received_message);
             curr_bet.set_clientinfo(client);
 
-            if (curr_bet.is_winning_bet(global_winning_outcome)) {
-                std::cout << "Good job buddy... xd" << std::endl;
+            bool client_won = curr_bet.is_winning_bet(get_next_outcome());
+
+            if (client_won) {
+                std::cout << "Bet won..." << std::endl;
+                std::string response_string = std::string(1, OperationCodes::WIN_CODE) +
+                    " " + std::to_string(curr_bet.get_amount());
+                response = response_string.c_str();
+                server.send_to_client(response);
             } else {
-                std::cout << "epic fail... );" << std::endl;
+
+                std::cout << "Bet lost ):" << std::endl;
+                std::string response_string = std::string(1, OperationCodes::LOSS_CODE) +
+                    " " + std::to_string(curr_bet.get_amount());
+                response = response_string.c_str();
+                server.send_to_client(response);
             }
 
 
@@ -36,3 +47,9 @@ void init_thread(Messenger server) {
     }
 }
 
+Outcome get_next_outcome() {
+    while (!outcome_generated) {
+
+    }
+    return Outcome(global_winning_outcome);
+}

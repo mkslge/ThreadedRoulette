@@ -9,16 +9,17 @@
 #include "../Models/bet.h"
 #include <iostream>
 #include <string>
-#include "utility.h"
+#include "../Utility/utility.h"
 #include <chrono>
-#include "OperationCodes.h"
+#include "../Utility/OperationCodes.h"
 #include <thread>
 
 
 inline Outcome global_winning_outcome;
 inline std::vector<std::thread> threads;
-
+inline bool outcome_generated = false;
 void init_thread(Messenger server);
+Outcome get_next_outcome();
 
 
 
