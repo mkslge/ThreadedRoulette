@@ -26,8 +26,8 @@ set(SHARED_SOURCES
         Utility/OperationCodes.cpp
         Utility/OperationCodes.h
 
-        Utility/threadutil.cpp
-        Utility/threadutil.h
+        Server/serverutility.cpp
+        Server/serverutility.h
 
 )
 
@@ -42,10 +42,12 @@ add_executable(Client
         ${SHARED_SOURCES}
         Utility/OperationCodes.cpp
         Utility/OperationCodes.h
-        Utility/threadutil.cpp
-        Utility/threadutil.h
+        Server/serverutility.cpp
+        Server/serverutility.h
         Models/clientinfo.cpp
         Models/clientinfo.h
         Models/bet.cpp
         Models/bet.h
+        Client/clientutility.cpp
+        Client/clientutility.h
 )

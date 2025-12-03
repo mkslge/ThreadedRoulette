@@ -40,6 +40,7 @@ public:
 
     bool is_winning_bet(Outcome winning_outcome);
 
+    int get_amount();
 
 
 

@@ -32,6 +32,8 @@ std::string bet::prompt_bet_color() {
         if (valid_bet_color(color)) {
             this->color = color;
             return color;
+        } else {
+            std::cout << "Invalid color , try again." << std::endl;
         }
     }
     return "";
@@ -46,6 +48,8 @@ int bet::prompt_bet_amount() {
         if (this->valid_bet_amount(amount)) {
             this->amount = amount;
             return amount;
+        } else {
+            std::cout << "Invalid bet amount, try again." << std::endl;
         }
     }
     return -1;
@@ -98,12 +102,16 @@ bet bet::encode_bet_string(std::string bet_string) {
     std::string p_amount = split_bet_string[1];
     std::string p_color = split_bet_string[2];
 
-    return bet();
 
+    return bet(std::stoi(p_amount), p_color);
 }
 
 bool bet::is_winning_bet(Outcome outcome) {
     std::map<char,Color> map = get_outcome_map();
 
-    return map[this->color[0]] == outcome.get_color();
+    return map[color[0]] == outcome.get_color();
+}
+
+int bet::get_amount() {
+    return this->amount;
 }

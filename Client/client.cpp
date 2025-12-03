@@ -6,7 +6,7 @@
 #include "../messenger.h"
 #include "../Utility/OperationCodes.h"
 #include "../Utility/utility.h"
-#include "../Utility/threadutil.h"
+#include "clientutility.h"
 #include "../Models/bet.h"
 #include "../Models/clientinfo.h"
 #include <chrono>
@@ -41,26 +41,30 @@ int main() {
             std::string bet_code = curr_bet.create_bet_code();
             messenger.send(bet_code.c_str());
 
-            /*std::string bet_color;
-            std::cout << "What color do you want to bet on? (R, B, or G)" << std::endl;
-            std:: cin >> bet_color;
-            int bet_amount;
-            std::cout << "How much do you want to bet?" << std::endl;
-            std:: cin >> bet_amount;
-            std::string bet_command = bet::create_bet_message(bet_amount, bet_color);
-            std:: cout << "Bet command: " << bet_command << std::endl;*/
-            return 0;
+
+            std::cout << messenger.receive() << std::endl;
+            std::string server_response = messenger.receive();
+            int bet_result = parse_bet_result(server_response);
+            if (result_is_win(server_response)) {
+                std::cout << "You won!" << std::endl;
+            } else {
+                std::cout << "You lost..." << std::endl;
+            }
+            amount += bet_result;
+
+            std::cout << "Bet result: " << bet_result << std::endl;
+
 
         }
 
 
 
 
-        std::cout << messenger.receive() << std::endl;
+
     }
 
 
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+
 
 
 

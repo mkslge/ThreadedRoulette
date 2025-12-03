@@ -27,6 +27,7 @@ public:
 
     Outcome(Color color, int value);
     Outcome();
+    Outcome(const Outcome& other);
 
     Color get_color();
 

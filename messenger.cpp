@@ -105,7 +105,7 @@ bool Messenger::send(const char* message) {
 bool Messenger::send_to_client(const char* message) {
     ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
         ,0 , (const struct sockaddr*) &client, sizeof(client));
-
+    std::cout << "Message: " << message << std::endl;
     std::cout << "Sent message to client: " << message << std::endl;
 
     return true;

@@ -16,7 +16,7 @@
 #include "../messenger.h"
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
-#include  "../Utility/threadutil.h"
+#include "serverutility.h"
 #include "../Utility/OperationCodes.h"
 
 
@@ -41,8 +41,10 @@ int main() {
         //if new player, joins, we handle that in a new thread
         std:: cout << "Spinning wheel..." << std::endl;
         global_winning_outcome = Outcome::generate_random_outcome();
+        outcome_generated = true;
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(10));
+        outcome_generated = false;
+        std::this_thread::sleep_for(std::chrono::seconds(5));
 
     }
 
