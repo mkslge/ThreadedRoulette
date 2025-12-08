@@ -26,6 +26,7 @@
 
 
 int main() {
+    int threads_made = 0;
     srand(time(0));
     std::cout << "Starting server..." << std::endl;
     Messenger messenger(SERVER);
@@ -35,7 +36,8 @@ int main() {
         if (is_join_message(messenger.receive_no_wait())) {
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
-            threads.emplace_back(&init_thread, messenger);
+            threads.emplace_back(&init_thread, messenger, threads_made);
+            threads_made++;
         }
         //here we want server
         //if new player, joins, we handle that in a new thread
