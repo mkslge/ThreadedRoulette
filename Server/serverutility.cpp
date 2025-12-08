@@ -5,7 +5,7 @@
 #include "serverutility.h"
 #include <thread>
 
-void init_thread(Messenger server) {
+void init_thread(Messenger server, int thread_num) {
     std::cout << "Starting up thread..." << std::endl;
     clientinfo client = clientinfo();
     const char* response;
@@ -41,7 +41,7 @@ void init_thread(Messenger server) {
 
 
         } else {
-            std::cout << "Waiting..." << std::endl;
+            std::cout << "Waiting in thread " << thread_num << "..." << std::endl;
             std:std::this_thread::sleep_for(std::chrono::seconds(1));
         }
     }
