@@ -23,12 +23,17 @@ private:
 public:
     Messenger(MessageRole role);
     Messenger(sockaddr_in dest, int port_number);
+
     std::string receive();
     std::string receive_no_wait();
     bool send(const char* message);
     bool send_to_client(const char* message);
 
     int get_port_number() const;
+
+    void set_client(sockaddr_in client);
+    sockaddr_in get_client();
+
 
 
 

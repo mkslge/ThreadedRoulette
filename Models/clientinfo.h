@@ -17,7 +17,7 @@ public:
     int get_balance();
     void add_balance(int amount);
     void remove_balance(int amount);
-    bool sufficient_balance(int bet_amount);
+    bool sufficient_balance(int bet_amount) const;
 };
 
 

@@ -118,3 +118,13 @@ bool Messenger::send_to_client(const char* message) {
 int Messenger::get_port_number() const {
     return port_number;
 }
+
+
+void Messenger::set_client(sockaddr_in client) {
+    this->client = client;
+}
+
+sockaddr_in Messenger::get_client() {
+    return client;
+}
+

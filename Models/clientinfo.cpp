@@ -21,7 +21,7 @@ void clientinfo::remove_balance(int amount) {
     this->balance -= amount;
 }
 
-bool clientinfo::sufficient_balance(int bet_amount) {
+bool clientinfo::sufficient_balance(int bet_amount) const {
     return bet_amount <= this->balance;
 }
 
