@@ -19,12 +19,6 @@
 #include "serverutility.h"
 #include "../Utility/OperationCodes.h"
 
-
-
-
-
-
-
 int main() {
     int threads_made = 0;
     srand(time(0));
@@ -33,10 +27,12 @@ int main() {
 
     //main game loop
     while (true) {
-        if (is_join_message(messenger.receive_no_wait())) {
+        while (is_join_message(messenger.receive_no_wait())) {
+            //Messenger* new_messenger = new Messenger(SERVER);
+            //new_messenger->set_client(messenger.get_client());
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
-            threads.emplace_back(&init_thread, messenger, threads_made);
+            threads.emplace_back(&init_thread, std::ref(messenger), threads_made);
             threads_made++;
         }
         //here we want server
@@ -46,7 +42,9 @@ int main() {
         outcome_generated = true;
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
         outcome_generated = false;
+        std::cout << "Made " << threads_made << "threads..." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(5));
+
 
     }
 

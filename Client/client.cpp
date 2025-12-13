@@ -33,7 +33,7 @@ int main() {
             std::cout << "Exiting..." << std::endl;
             messenger.send(command.c_str());
             return 0;
-        } if (bet::is_bet_command(command)) {
+        } else if (bet::is_bet_command(command)) {
             bet curr_bet = bet(client);
 
             curr_bet.prompt_bet_color();
@@ -47,6 +47,9 @@ int main() {
             int bet_result = parse_bet_result(server_response);
             if (result_is_win(server_response)) {
                 std::cout << "You won!" << std::endl;
+            } else if (is_join_message(command)) {
+                std::cout << "Join message in another thread... SHOULD NOT HAPPEN" << std::endl;
+
             } else {
                 std::cout << "You lost..." << std::endl;
             }
