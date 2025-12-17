@@ -15,7 +15,7 @@ int WHEEL_SIZE = 10;
 
 class Wheel {
 private:
-    int roulette_values[WHEEL_SIZE];
+    std::vector<int >roulette_values;
     bool win;
     int guessed_value;
     std::string wheel;

@@ -8,6 +8,7 @@
 
 
 void Wheel::generate_wheel() {
+    //this->roulette_values[10];
     std::set<int> generated_values;
     generated_values.emplace(this->guessed_value);
 
