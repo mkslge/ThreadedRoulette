@@ -14,6 +14,7 @@ public:
     static char BET_CODE;
     static char WIN_CODE;
     static char LOSS_CODE;
+    static int ROULETTE_SIZE;
 private:
     OperationCodes();
 public:
@@ -22,6 +23,7 @@ public:
     static char get_bet_code();
     static char get_win_code();
     static char get_loss_code();
+    static int get_roulette_size();
 };
 
 

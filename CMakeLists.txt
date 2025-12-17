@@ -50,4 +50,6 @@ add_executable(Client
         Models/bet.h
         Client/clientutility.cpp
         Client/clientutility.h
+        Models/wheel.cpp
+        Models/wheel.h
 )

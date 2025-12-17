@@ -25,6 +25,8 @@ std::string string_to_lower(std::string);
 std::vector<std::string> split_string(const std::string&, char delim);
 
 std::map<char, Color> get_outcome_map();
+int get_random_value(int max);
+
 
 bool is_join_message(std::string msg);
 bool is_exit_message(std::string msg);

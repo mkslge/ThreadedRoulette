@@ -9,6 +9,7 @@ char OperationCodes::JOIN_CODE = 'j';
 char OperationCodes::BET_CODE = 'b';
 char OperationCodes::WIN_CODE = 'w';
 char OperationCodes::LOSS_CODE = 'l';
+int OperationCodes::ROULETTE_SIZE = 37;
 
 OperationCodes::OperationCodes() {
 
@@ -39,3 +40,9 @@ char OperationCodes::get_loss_code() {
 
     return LOSS_CODE;
 }
+
+int OperationCodes::get_roulette_size() {
+
+    return ROULETTE_SIZE;
+}
+
