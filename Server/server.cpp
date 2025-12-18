@@ -17,11 +17,16 @@
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
 #include "serverutility.h"
+#include "../Models/wheel.h"
 #include "../Utility/OperationCodes.h"
 
 int main() {
-    int threads_made = 0;
     srand(time(0));
+    Wheel wheel(true,10);
+    return 0;
+
+    int threads_made = 0;
+
     std::cout << "Starting server..." << std::endl;
     Messenger messenger(SERVER);
 

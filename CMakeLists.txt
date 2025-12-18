@@ -29,6 +29,15 @@ set(SHARED_SOURCES
         Server/serverutility.cpp
         Server/serverutility.h
 
+        Models/wheel.cpp
+        Models/wheel.h
+
+        Models/clientinfo.cpp
+        Models/clientinfo.h
+
+        Models/bet.cpp
+        Models/bet.h
+
 )
 
 add_executable(Server
@@ -44,12 +53,8 @@ add_executable(Client
         Utility/OperationCodes.h
         Server/serverutility.cpp
         Server/serverutility.h
-        Models/clientinfo.cpp
-        Models/clientinfo.h
-        Models/bet.cpp
-        Models/bet.h
+
         Client/clientutility.cpp
         Client/clientutility.h
-        Models/wheel.cpp
-        Models/wheel.h
+
 )

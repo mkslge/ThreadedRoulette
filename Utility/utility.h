@@ -17,6 +17,8 @@
 #include <cctype>
 #include <vector>
 #include <sstream>
+#include <random>
+#include <ctime>
 #include <map>
 #include "../Models/color.h"
 #include "OperationCodes.h"
