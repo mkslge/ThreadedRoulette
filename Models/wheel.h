@@ -11,11 +11,12 @@
 #include <set>
 #include <string>
 
-int WHEEL_SIZE = 10;
+inline int WHEEL_SIZE = 12;
 
 class Wheel {
 private:
     std::vector<int >roulette_values;
+    std::vector<std::string> string_structure;
     bool win;
     int guessed_value;
     std::string wheel;

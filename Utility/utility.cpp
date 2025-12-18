@@ -56,7 +56,8 @@ bool is_exit_message(std::string msg) {
 
 int get_random_value(int max) {
 
-return rand() % max;
+
+    return rand() % max;
 }
 
 

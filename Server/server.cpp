@@ -17,19 +17,22 @@
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
 #include "serverutility.h"
+#include "../Models/wheel.h"
 #include "../Utility/OperationCodes.h"
 
 int main() {
-    int threads_made = 0;
     srand(time(0));
+
+
+    int threads_made = 0;
+
     std::cout << "Starting server..." << std::endl;
     Messenger messenger(SERVER);
 
     //main game loop
     while (true) {
         while (is_join_message(messenger.receive_no_wait())) {
-            //Messenger* new_messenger = new Messenger(SERVER);
-            //new_messenger->set_client(messenger.get_client());
+
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
             threads.emplace_back(&init_thread, std::ref(messenger), threads_made);
