@@ -22,8 +22,7 @@
 
 int main() {
     srand(time(0));
-    Wheel wheel(true,10);
-    return 0;
+
 
     int threads_made = 0;
 
@@ -33,8 +32,7 @@ int main() {
     //main game loop
     while (true) {
         while (is_join_message(messenger.receive_no_wait())) {
-            //Messenger* new_messenger = new Messenger(SERVER);
-            //new_messenger->set_client(messenger.get_client());
+
             //add new thread in here
             std::cout << "New thread being made..." << std::endl;
             threads.emplace_back(&init_thread, std::ref(messenger), threads_made);
