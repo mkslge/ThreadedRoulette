@@ -5,7 +5,7 @@
 #ifndef THREADUTIL_H
 #define THREADUTIL_H
 
-#include "../messenger.h"
+#include "../Models/messenger.h"
 #include "../Models/bet.h"
 #include <iostream>
 #include <string>
@@ -14,6 +14,7 @@
 #include "../Utility/OperationCodes.h"
 #include <thread>
 
+inline int SERVER_STARTING_BALANCE = 10000;
 
 inline Outcome global_winning_outcome;
 inline std::vector<std::thread> threads;

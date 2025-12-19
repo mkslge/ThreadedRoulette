@@ -26,7 +26,7 @@ public:
     bool valid_and_funded_bet(int bet_amount);
 
     std::string prompt_bet_color();
-    int prompt_bet_amount();
+    int prompt_bet_amount(clientinfo client);
 
     std::string create_bet_code();
     static bet encode_bet_string(std::string bet_string);

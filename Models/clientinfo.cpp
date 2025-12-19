@@ -25,6 +25,11 @@ bool clientinfo::sufficient_balance(int bet_amount) const {
     return bet_amount <= this->balance;
 }
 
+int clientinfo::get_balance() {
+    return this->balance;
+}
+
+
 
 
 

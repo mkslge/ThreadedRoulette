@@ -3,7 +3,7 @@
 //
 #include <iostream>
 
-#include "../messenger.h"
+#include "../Models/messenger.h"
 #include "../Utility/OperationCodes.h"
 #include "../Utility/utility.h"
 #include "clientutility.h"
@@ -25,10 +25,10 @@ int main() {
 
     clientinfo client = clientinfo();
 
-    int amount = 100;
+
     while (true) {
         std::string command;
-        std::cout << "Type E to exit, or B to bet: " << std::endl;
+        std::cout << "Type E to exit, or B to bet, your balance is now " << client.get_balance() << ": " << std::endl;
         std::cin >> command;
 
         if (is_exit_message(command)) {
@@ -41,7 +41,7 @@ int main() {
 
             //prompt user for the color and amount to bet
             curr_bet.prompt_bet_color();
-            curr_bet.prompt_bet_amount();
+            curr_bet.prompt_bet_amount(client);
 
             //start animation thread
             std::cout << BET_RESULT_RECEIVED;
@@ -60,7 +60,6 @@ int main() {
             BET_RESULT_RECEIVED = true;
             bet_animation_thread.join();
 
-            std::cout << "Received response " << server_response << std::endl;
             int bet_result = parse_bet_result(server_response);
 
 
@@ -69,9 +68,9 @@ int main() {
 
 
 
-            amount += bet_result;
 
-            std::cout << "Bet result: " << bet_result << std::endl;
+            client.add_balance(bet_result);
+            std::cout << "Your current balance is now " << client.get_balance() << std::endl;
 
 
         }

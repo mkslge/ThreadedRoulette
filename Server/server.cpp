@@ -13,7 +13,7 @@
 #include <chrono>
 #include <thread>
 
-#include "../messenger.h"
+#include "../Models/messenger.h"
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
 #include "serverutility.h"
@@ -22,7 +22,7 @@
 
 int main() {
     init_random_seed();
-
+    int server_balance = SERVER_STARTING_BALANCE;
     int threads_made = 0;
 
     std::cout << "Starting server..." << std::endl;
@@ -40,29 +40,24 @@ int main() {
         //here we want server
         //if new player, joins, we handle that in a new thread
         std:: cout << "Spinning wheel..." << std::endl;
+
+        //server-side animation
         Wheel wheel;
         wheel.spin();
+
+        //generating outcome
         global_winning_outcome = Outcome::generate_random_outcome();
         outcome_generated = true;
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
         outcome_generated = false;
-        std::cout << "Made " << threads_made << " threads..." << std::endl;
+
+        std::cout << "Current house balance: " << server_balance << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
     return 0;
 }
 
-
-
-
-void thread_init(sockaddr_in dest, int port) {
-    memset(&dest, 0, sizeof(dest));
-    dest.sin_family = AF_INET;
-    dest.sin_port = port;
-
-
-}
 
 
 

@@ -11,7 +11,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include "../messenger.h"
+#include "../Models/messenger.h"
 #include <string>
 #include <algorithm>
 #include <cctype>

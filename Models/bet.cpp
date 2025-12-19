@@ -39,13 +39,13 @@ std::string bet::prompt_bet_color() {
     return "";
 }
 
-int bet::prompt_bet_amount() {
+int bet::prompt_bet_amount(clientinfo client) {
 
     while (true) {
         std::cout << "How much do you want to bet?" << std::endl;
         int amount;
         std::cin >> amount;
-        if (this->valid_bet_amount(amount)) {
+        if (this->valid_bet_amount(amount) && client.sufficient_balance(amount)) {
             this->amount = amount;
             return amount;
         } else {
