@@ -28,7 +28,7 @@ void Wheel::spin() {
     this->run_ascii_animation();
     if (result_known) {
         if (win) {
-            print_lose_message();
+            this->print_win_message();
         } else {
             this->print_lose_message();
         }
@@ -112,16 +112,13 @@ void Wheel::print_string_structure() {
     clearScreen();
 }
 void Wheel::run_ascii_animation() {
-    for (int i = 0; i < 5;i++) {
-        this->generate_ascii_string();
-        this->roulette_values = rotate_vector(this->roulette_values);
-        this->print_string_structure();
+    for (int i = 0; i < 40;i++) {
         this->clear_ascii_structure();
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        this->generate_ascii_string();
+        this->print_string_structure();
+        this->roulette_values = rotate_vector(this->roulette_values);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
-
-
-
 }
 
 void Wheel::clear_ascii_structure() {
