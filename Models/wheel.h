@@ -21,12 +21,16 @@ private:
     int guessed_value;
     std::string wheel;
 public:
-
+    Wheel();
     Wheel(bool win, int guessed_value);
     void print_wheel();
+    void spin();
 private:
     void generate_wheel();
     void generate_ascii_string();
+    void print_string_structure();
+    void run_ascii_animation();
+    void clear_ascii_structure();
 };
 
 

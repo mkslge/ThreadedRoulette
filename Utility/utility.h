@@ -29,7 +29,12 @@ std::vector<std::string> split_string(const std::string&, char delim);
 std::map<char, Color> get_outcome_map();
 int get_random_value(int max);
 
-
 bool is_join_message(std::string msg);
 bool is_exit_message(std::string msg);
+
+void init_random_seed();
+std::vector<int> rotate_vector(const std::vector<int> &vector);
+void clearScreen();
+
+
 #endif //UTILITY_H
