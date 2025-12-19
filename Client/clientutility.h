@@ -9,9 +9,14 @@
 #include <string>
 #include "../Utility/utility.h"
 #include "../Utility/OperationCodes.h"
+#include "../Models/wheel.h"
+
+inline bool BET_RESULT_RECEIVED = false;
+
 int parse_bet_result(const std::string& response_string);
 bool result_is_win(std::string result);
 
+void spin_wheel_animation();
 
 
 #endif //CLIENTUTILITY_H

@@ -15,8 +15,14 @@ int parse_bet_result(const std::string& response_string){
     }
     std::string p_result = split_bet_string[0];
     int p_amount = std::stoi(split_bet_string[1]);
-    std::cout << "P amount: " << p_amount << std::endl;
-
 
     return result_is_win(p_result) ? p_amount : -p_amount;
+}
+
+
+void spin_wheel_animation() {
+    Wheel animation_wheel = Wheel();
+    while (!BET_RESULT_RECEIVED) {
+        animation_wheel.spin();
+    }
 }
