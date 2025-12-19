@@ -18,11 +18,11 @@ private:
     std::vector<int >roulette_values;
     std::vector<std::string> string_structure;
     bool win;
-    int guessed_value;
+    bool result_known;
     std::string wheel;
 public:
     Wheel();
-    Wheel(bool win, int guessed_value);
+    Wheel(bool win);
     void print_wheel();
     void spin();
 private:
@@ -31,6 +31,8 @@ private:
     void print_string_structure();
     void run_ascii_animation();
     void clear_ascii_structure();
+    void print_win_message();
+    void print_lose_message();
 };
 
 

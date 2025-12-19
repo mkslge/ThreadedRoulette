@@ -42,6 +42,10 @@ set(SHARED_SOURCES
 
 add_executable(Server
         Server/server.cpp
+
+        Server/serverutility.cpp
+        Server/serverutility.h
+
         ${SHARED_SOURCES}
 
 )
@@ -49,10 +53,7 @@ add_executable(Server
 add_executable(Client
         Client/client.cpp
         ${SHARED_SOURCES}
-        Utility/OperationCodes.cpp
-        Utility/OperationCodes.h
-        Server/serverutility.cpp
-        Server/serverutility.h
+
 
         Client/clientutility.cpp
         Client/clientutility.h

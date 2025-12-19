@@ -7,32 +7,39 @@
 #include <thread>
 
 
-Wheel::Wheel(bool win, int guessed_value) {
+Wheel::Wheel(bool win) {
     this->win = win;
-    this->guessed_value = guessed_value;
+
     this->generate_wheel();
     this->generate_ascii_string();
-
+    this->result_known = true;
 }
 
 Wheel::Wheel() {
     this->win = false;
-    this->guessed_value = get_random_value(OperationCodes::get_roulette_size());
+
     this->generate_wheel();
     this->generate_ascii_string();
+    this->result_known = false;
 
 }
 
 void Wheel::spin() {
     this->run_ascii_animation();
+    if (result_known) {
+        if (win) {
+            print_lose_message();
+        } else {
+            this->print_lose_message();
+        }
+    }
 }
 
 void Wheel::generate_wheel() {
     std::set<int> generated_values;
-    generated_values.emplace(this->guessed_value);
-    roulette_values.emplace_back(this->guessed_value);
 
-    for (int i = 1; i < WHEEL_SIZE;i++) {
+
+    for (int i = 0; i < WHEEL_SIZE;i++) {
         int generated_value = get_random_value(OperationCodes::get_roulette_size());
         while (generated_values.contains(generated_value)) {
             generated_value = get_random_value(OperationCodes::get_roulette_size());
@@ -113,11 +120,37 @@ void Wheel::run_ascii_animation() {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 
+
+
 }
 
 void Wheel::clear_ascii_structure() {
     string_structure.clear();
 }
+
+void Wheel::print_win_message() {
+    std::cout << R"(
+██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗██╗███╗   ██╗
+╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║    ██║██║████╗  ██║
+ ╚████╔╝ ██║   ██║██║   ██║    ██║ █╗ ██║██║██╔██╗ ██║
+  ╚██╔╝  ██║   ██║██║   ██║    ██║███╗██║██║██║╚██╗██║
+   ██║   ╚██████╔╝╚██████╔╝    ╚███╔███╔╝██║██║ ╚████║
+   ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝
+)" << std::endl;
+}
+
+void Wheel::print_lose_message() {
+    std::cout << R"(
+██╗   ██╗ ██████╗ ██╗   ██╗    ██╗      ██████╗ ███████╗███████╗
+╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║     ██╔═══██╗██╔════╝██╔════╝
+ ╚████╔╝ ██║   ██║██║   ██║    ██║     ██║   ██║███████╗█████╗
+  ╚██╔╝  ██║   ██║██║   ██║    ██║     ██║   ██║╚════██║██╔══╝
+   ██║   ╚██████╔╝╚██████╔╝    ███████╗╚██████╔╝███████║███████╗
+   ╚═╝    ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝ ╚══════╝╚══════╝
+)" << std::endl;
+
+}
+
 
 
 
