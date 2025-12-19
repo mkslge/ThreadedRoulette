@@ -55,9 +55,23 @@ bool is_exit_message(std::string msg) {
 
 
 int get_random_value(int max) {
-
-
     return rand() % max;
 }
 
+void init_random_seed() {
+    srand(time(0));
+}
 
+
+std::vector<int> rotate_vector(const std::vector<int> &vector) {
+    std::vector<int> temp_vector(vector.size());
+    for (int i = 0; i < vector.size();i++) {
+        temp_vector[i] = vector[(i + 1) % vector.size()];
+    }
+    return std::vector(temp_vector);
+}
+
+void clearScreen() {
+    //ANSI escape code
+    std::cout << "\033[2J\033[H";
+}

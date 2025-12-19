@@ -21,8 +21,7 @@
 #include "../Utility/OperationCodes.h"
 
 int main() {
-    srand(time(0));
-
+    init_random_seed();
 
     int threads_made = 0;
 
@@ -41,11 +40,13 @@ int main() {
         //here we want server
         //if new player, joins, we handle that in a new thread
         std:: cout << "Spinning wheel..." << std::endl;
+        Wheel wheel;
+        wheel.spin();
         global_winning_outcome = Outcome::generate_random_outcome();
         outcome_generated = true;
         std::cout << "Spun wheel, " << global_winning_outcome.to_string() << std::endl;
         outcome_generated = false;
-        std::cout << "Made " << threads_made << "threads..." << std::endl;
+        std::cout << "Made " << threads_made << " threads..." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(5));
 
 

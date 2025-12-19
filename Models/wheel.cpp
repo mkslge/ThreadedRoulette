@@ -4,11 +4,30 @@
 
 #include "wheel.h"
 
+#include <thread>
 
 
+Wheel::Wheel(bool win, int guessed_value) {
+    this->win = win;
+    this->guessed_value = guessed_value;
+    this->generate_wheel();
+    this->generate_ascii_string();
+
+}
+
+Wheel::Wheel() {
+    this->win = false;
+    this->guessed_value = get_random_value(OperationCodes::get_roulette_size());
+    this->generate_wheel();
+    this->generate_ascii_string();
+
+}
+
+void Wheel::spin() {
+    this->run_ascii_animation();
+}
 
 void Wheel::generate_wheel() {
-    //this->roulette_values[10];
     std::set<int> generated_values;
     generated_values.emplace(this->guessed_value);
     roulette_values.emplace_back(this->guessed_value);
@@ -24,12 +43,7 @@ void Wheel::generate_wheel() {
 }
 
 
-Wheel::Wheel(bool win, int guessed_value) {
-    this->win = win;
-    this->guessed_value = guessed_value;
-    this->generate_wheel();
-    this->generate_ascii_string();
-}
+
 
 void Wheel::generate_ascii_string() {
     string_structure.emplace_back(R"(              _________
@@ -55,7 +69,7 @@ void Wheel::generate_ascii_string() {
     string_structure.emplace_back(std::to_string(roulette_values[3]));
 
     string_structure.emplace_back(R"(      \
- |             .-''       ''-.             |
+ |             .-''       ''-.           |
  |   )");
     string_structure.emplace_back(std::to_string(roulette_values[9]));
 
@@ -63,7 +77,7 @@ void Wheel::generate_ascii_string() {
     string_structure.emplace_back(std::to_string(roulette_values[4]));
 
     string_structure.emplace_back(R"(   |
- |             '-._________.-'             |
+ |             '-._________.-'           |
   \      )");
     string_structure.emplace_back(std::to_string(roulette_values[8]));
 
@@ -78,17 +92,32 @@ void Wheel::generate_ascii_string() {
     string_structure.emplace_back(std::to_string(roulette_values[6]));
 
     string_structure.emplace_back(R"(      .'
-     '-.                                      .-'
-         '-.__________             ________.-')");
+     '-.                          .-'
+         '-.__________________.-')");
+    string_structure.emplace_back("\n");
 
-
-
-
-    for (int i = 0; i < string_structure.size();i++) {
-        std::cout << string_structure[i];
-    }
 }
 
+void Wheel::print_string_structure() {
+    for (const auto & curr_string : string_structure) {
+        std::cout << curr_string;
+    }
+    clearScreen();
+}
+void Wheel::run_ascii_animation() {
+    for (int i = 0; i < 5;i++) {
+        this->generate_ascii_string();
+        this->roulette_values = rotate_vector(this->roulette_values);
+        this->print_string_structure();
+        this->clear_ascii_structure();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+
+}
+
+void Wheel::clear_ascii_structure() {
+    string_structure.clear();
+}
 
 
 
