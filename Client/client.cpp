@@ -43,8 +43,9 @@ int main() {
             messenger.send(bet_code.c_str());
 
 
-            std::cout << messenger.receive() << std::endl;
+            //std::cout << "Received response " << messenger.receive() << std::endl;
             std::string server_response = messenger.receive();
+            std::cout << "Received response " << server_response << std::endl;
             int bet_result = parse_bet_result(server_response);
 
 
