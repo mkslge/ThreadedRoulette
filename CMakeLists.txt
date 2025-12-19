@@ -20,20 +20,14 @@ set(SHARED_SOURCES
         Utility/utility.cpp
         Utility/utility.h
 
-        messenger.cpp
-        messenger.h
+        Models/messenger.cpp
+        Models/messenger.h
 
         Utility/OperationCodes.cpp
         Utility/OperationCodes.h
 
-        Server/serverutility.cpp
-        Server/serverutility.h
-
         Models/wheel.cpp
         Models/wheel.h
-
-        Models/clientinfo.cpp
-        Models/clientinfo.h
 
         Models/bet.cpp
         Models/bet.h
@@ -53,7 +47,6 @@ add_executable(Server
 add_executable(Client
         Client/client.cpp
         ${SHARED_SOURCES}
-
 
         Client/clientutility.cpp
         Client/clientutility.h
