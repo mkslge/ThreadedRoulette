@@ -48,8 +48,6 @@ int main() {
         outcome_generated = false;
         std::cout << "Made " << threads_made << " threads..." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(5));
-
-
     }
 
     return 0;

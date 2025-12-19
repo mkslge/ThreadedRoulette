@@ -9,6 +9,7 @@
 #include "clientutility.h"
 #include "../Models/bet.h"
 #include "../Models/clientinfo.h"
+#include "../Models/wheel.h"
 #include <chrono>
 #include <thread>
 #include <string>
@@ -45,14 +46,13 @@ int main() {
             std::cout << messenger.receive() << std::endl;
             std::string server_response = messenger.receive();
             int bet_result = parse_bet_result(server_response);
-            if (result_is_win(server_response)) {
-                std::cout << "You won!" << std::endl;
-            } else if (is_join_message(command)) {
-                std::cout << "Join message in another thread... SHOULD NOT HAPPEN" << std::endl;
 
-            } else {
-                std::cout << "You lost..." << std::endl;
-            }
+
+            Wheel wheel(result_is_win(server_response));
+            wheel.spin();
+
+
+
             amount += bet_result;
 
             std::cout << "Bet result: " << bet_result << std::endl;
