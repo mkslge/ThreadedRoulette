@@ -19,7 +19,9 @@ inline int SERVER_STARTING_BALANCE = 10000;
 inline Outcome global_winning_outcome;
 inline std::vector<std::thread> threads;
 inline bool outcome_generated = false;
+
 void init_thread(Messenger server, int thread_num);
+
 Outcome get_next_outcome();
 
 
