@@ -33,15 +33,11 @@ Messenger::Messenger(MessageRole role) {
             exit(EXIT_FAILURE);
         }
     }
-
-    /*int client_message_size = recvfrom(socket_fd, (char*) buffer, sizeof(buffer),
-        MSG_WAITALL, (struct sockaddr*) &client, &client_length);
-
-    buffer[client_message_size] = '\0';
-    std:: cout << "Received " << buffer << std::endl;*/
 }
 
 
+/* Receives message, waiting for message to be received if none has been sent to Messenger.
+ */
 std::string Messenger::receive() {
 
     int client_message_size = recvfrom(socket_fd, buffer, sizeof(buffer),
@@ -51,7 +47,9 @@ std::string Messenger::receive() {
 
     return std::string(this->buffer);
 }
-
+/* Receives a message only if a message has already been sent by a client.
+ * returns "" if no message has been sent by a client
+ */
 std::string Messenger::receive_no_wait() {
     struct timeval tv{0,0};
 
@@ -80,12 +78,10 @@ std::string Messenger::receive_no_wait() {
         return "";
     }
 
-
-
-
     return std::string(this->buffer);
 
 }
+
 
 bool Messenger::send(const char* message) {
     ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
@@ -98,15 +94,12 @@ bool Messenger::send(const char* message) {
         return false;
     }
 
-    std::cout << "Sent " << bytes_sent << " bytes: " << message << std::endl;
     return true;
 }
 
 bool Messenger::send_to_client(const char* message) {
     ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
         ,0 , (const struct sockaddr*) &client, sizeof(client));
-    std::cout << "Message: " << message << std::endl;
-    std::cout << "Sent message to client: " << message << std::endl;
 
     return true;
 }

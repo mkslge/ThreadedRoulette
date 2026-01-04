@@ -38,7 +38,6 @@ void Wheel::spin() {
 void Wheel::generate_wheel() {
     std::set<int> generated_values;
 
-
     for (int i = 0; i < WHEEL_SIZE;i++) {
         int generated_value = get_random_value(OperationCodes::get_roulette_size());
         while (generated_values.contains(generated_value)) {
@@ -50,8 +49,30 @@ void Wheel::generate_wheel() {
 }
 
 
+void Wheel::print_string_structure() {
+    for (const auto & curr_string : string_structure) {
+        std::cout << curr_string;
+    }
+    clearScreen();
+}
+void Wheel::run_ascii_animation() {
+    for (int i = 0; i < 40;i++) {
+        this->clear_ascii_structure();
+        this->generate_ascii_string();
+        this->print_string_structure();
+        this->roulette_values = rotate_vector(this->roulette_values);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
+
+void Wheel::clear_ascii_structure() {
+    string_structure.clear();
+}
 
 
+
+/* This code generates an ascii presentation of a roulette wheel
+ */
 void Wheel::generate_ascii_string() {
     string_structure.emplace_back(R"(              _________
          .-'''           '''-.
@@ -105,26 +126,8 @@ void Wheel::generate_ascii_string() {
 
 }
 
-void Wheel::print_string_structure() {
-    for (const auto & curr_string : string_structure) {
-        std::cout << curr_string;
-    }
-    clearScreen();
-}
-void Wheel::run_ascii_animation() {
-    for (int i = 0; i < 40;i++) {
-        this->clear_ascii_structure();
-        this->generate_ascii_string();
-        this->print_string_structure();
-        this->roulette_values = rotate_vector(this->roulette_values);
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    }
-}
-
-void Wheel::clear_ascii_structure() {
-    string_structure.clear();
-}
-
+/* Generates ascii representation of win message
+ */
 void Wheel::print_win_message() {
     std::cout << R"(
 ██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗██╗███╗   ██╗
@@ -136,6 +139,8 @@ void Wheel::print_win_message() {
 )" << std::endl;
 }
 
+/* Generates ascii representation of lose message
+ */
 void Wheel::print_lose_message() {
     std::cout << R"(
 ██╗   ██╗ ██████╗ ██╗   ██╗    ██╗      ██████╗ ███████╗███████╗

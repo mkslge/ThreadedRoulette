@@ -9,6 +9,9 @@
 
 inline int DEFAULT_STARTING_BALANCE = 100;
 
+/* The clientinfo class represents the info from a given client, and is meant to track
+ * info even if it at some point disconnects and reconnects.
+ */
 class clientinfo {
     int balance;
 public:

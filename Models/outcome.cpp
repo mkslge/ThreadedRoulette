@@ -4,6 +4,11 @@
 
 #include "outcome.h"
 
+static const std::unordered_set<int> red_numbers = {
+    1,3,5,7,9,12,14,16,18,
+    19,21,23,25,27,30,32,34,36
+};
+
 Outcome::Outcome(Color color, int value) : color(color), value(value) {
 
 }
@@ -40,22 +45,14 @@ int get_random_roulette_number() {
     return rand() % 37;
 }
 
+
 Outcome Outcome::generate_random_outcome() {
     int random_number = get_random_roulette_number();
+
     if (random_number == 0) {
         return {Color::GREEN, 0};
     }
 
-    static const int red_numbers[] = {
-        1,3,5,7,9,12,14,16,18,
-        19,21,23,25,27,30,32,34,36
-    };
-
-    for (int red_nubmer : red_numbers) {
-        if (random_number == red_nubmer) {
-            return {Color::RED, random_number};
-        }
-    }
-
-    return {Color::BLACK, random_number};
+    Color resulting_color = red_numbers.contains(random_number) ? Color::RED : Color::BLACK;
+    return {resulting_color, random_number};
 }

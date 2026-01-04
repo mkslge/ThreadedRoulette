@@ -10,6 +10,7 @@
 #include <random>
 #include <ctime>
 #include <cstdlib>
+#include <unordered_set>
 #include "color.h"
 
 
@@ -18,6 +19,7 @@ class Outcome {
 private:
     Color color;
     int value;
+
 
 
 
