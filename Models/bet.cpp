@@ -23,6 +23,10 @@ bet::bet(int amount, const std::string &color) {
     this->color = color;
 }
 
+/*Prompts user which color the roulette wheel will land on
+ * until a valid color is given. This function is guarenteed to
+ * return a valid color
+ */
 std::string bet::prompt_bet_color() {
 
     while (true) {
@@ -39,6 +43,10 @@ std::string bet::prompt_bet_color() {
     return "";
 }
 
+/* Prompts a user for a a bet amount ($). Continues to prompt until a valid prompt is given
+ * It is guarenteed to return a valid bet amount
+ *
+ **/
 int bet::prompt_bet_amount(clientinfo client) {
 
     while (true) {
@@ -78,6 +86,7 @@ bool bet::is_bet_command(const std::string &cmd) {
     return !lowercase_cmd.empty() && lowercase_cmd[0] == 'b';
 }
 
+
 bool bet::valid_bet_amount(int bet_amount) {
     return bet_amount >= MIN_BET_AMOUNT && bet_amount <= MAX_BET_AMOUNT;
 }
@@ -93,17 +102,20 @@ bool bet::valid_bet_color(std::string &color) {
 }
 
 
+/* Turns bet string from the format "COMMAND_TYPE AMOUNT COLOR"
+ *  into a valid bet object.
+ *  If an invalid bet_string is given
+ * returns an empty bet.
+ */
 bet bet::encode_bet_string(std::string bet_string) {
     std::vector<std::string> split_bet_string = split_string(bet_string, ' ');
     if (split_bet_string.size() < 3) {
-        return bet();
+        return bet{};
     }
-    std::string p_bet_cmd = split_bet_string[0];
-    std::string p_amount = split_bet_string[1];
-    std::string p_color = split_bet_string[2];
+    const std::string& p_amount = split_bet_string[1];
+    const std::string& p_color = split_bet_string[2];
 
-
-    return bet(std::stoi(p_amount), p_color);
+    return bet {std::stoi(p_amount), p_color};
 }
 
 bool bet::is_winning_bet(Outcome outcome) {
