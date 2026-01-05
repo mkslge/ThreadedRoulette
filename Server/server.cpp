@@ -4,25 +4,20 @@
 #include <iostream>
 #include <vector>
 #include <thread>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 #include <string>
 
 #include <chrono>
-#include <thread>
 
 #include "../Models/messenger.h"
 #include "../Models/outcome.h"
 #include "../Utility/utility.h"
 #include "serverutility.h"
 #include "../Models/wheel.h"
-#include "../Utility/OperationCodes.h"
+#include "../Utility/constants.h"
 
 int main() {
     init_random_seed();
-    int server_balance = SERVER_STARTING_BALANCE;
+    int server_balance = constants::get_server_starting_balance();
     int threads_made = 0;
 
     std::cout << "Starting server..." << std::endl;

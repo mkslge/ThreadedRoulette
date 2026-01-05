@@ -38,10 +38,10 @@ void Wheel::spin() {
 void Wheel::generate_wheel() {
     std::set<int> generated_values;
 
-    for (int i = 0; i < WHEEL_SIZE;i++) {
-        int generated_value = get_random_value(OperationCodes::get_roulette_size());
+    for (int i = 0; i < constants::get_roulette_ascii_size();i++) {
+        int generated_value = get_random_value(constants::get_roulette_size());
         while (generated_values.contains(generated_value)) {
-            generated_value = get_random_value(OperationCodes::get_roulette_size());
+            generated_value = get_random_value(constants::get_roulette_size());
         }
         generated_values.emplace(generated_value);
         roulette_values.emplace_back(generated_value);

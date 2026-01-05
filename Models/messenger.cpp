@@ -3,15 +3,6 @@
 //
 
 #include "messenger.h"
-#include <iostream>
-#include <string>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-
-
-//Messenger::Messenger(sockaddr_in dest, int port_number) : dest(dest) , port_number(port_number){}
 
 
 Messenger::Messenger(MessageRole role) {
@@ -101,7 +92,7 @@ bool Messenger::send_to_client(const char* message) {
     ssize_t bytes_sent = sendto(socket_fd, message, strlen(message)
         ,0 , (const struct sockaddr*) &client, sizeof(client));
 
-    return true;
+    return bytes_sent != -1;
 }
 
 

@@ -6,22 +6,18 @@
 #define OUTCOME_H
 
 #include <string>
-#include <utility>
-#include <random>
-#include <ctime>
-#include <cstdlib>
-#include <unordered_set>
 #include "color.h"
+#include<unordered_set>
 
-
+static const std::unordered_set<int> red_numbers = {
+    1,3,5,7,9,12,14,16,18,
+    19,21,23,25,27,30,32,34,36
+};
 
 class Outcome {
 private:
     Color color;
     int value;
-
-
-
 
 public:
     static Outcome generate_random_outcome();
@@ -31,19 +27,12 @@ public:
     Outcome();
     Outcome(const Outcome& other);
 
-    Color get_color();
-
-    int get_value();
-
     bool operator==(Outcome other);
 
-    std::string to_string();
+    Color get_color() const;
 
-
-
-
-
-
+    int get_value() const;
+    std::string to_string() const;
 };
 
 

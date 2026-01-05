@@ -6,6 +6,10 @@
 #define MESSAGER_H
 #include <netinet/in.h>
 #include <string>
+#include <iostream>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 
 enum MessageRole{CLIENT, SERVER};
@@ -31,6 +35,7 @@ public:
     bool send_to_client(const char* message);
 
     int get_port_number() const;
+
     void set_client(sockaddr_in client);
     sockaddr_in get_client();
 

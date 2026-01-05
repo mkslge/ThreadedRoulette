@@ -8,7 +8,7 @@
 
 #include <string>
 #include "../Utility/utility.h"
-#include "../Utility/OperationCodes.h"
+#include "../Utility/constants.h"
 #include "../Models/wheel.h"
 
 inline bool BET_RESULT_RECEIVED = false;

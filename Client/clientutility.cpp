@@ -5,7 +5,7 @@
 #include "clientutility.h"
 
 bool result_is_win(std::string result) {
-    return result[0] == OperationCodes::get_win_code();
+    return result[0] == constants::get_win_code();
 }
 
 int parse_bet_result(const std::string& response_string){

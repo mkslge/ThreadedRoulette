@@ -11,6 +11,8 @@
 #include <ctime>
 enum class Color {BLACK, RED, GREEN};
 
+/* Converts to Title case version of color
+ */
 std::string color_to_string(Color color);
 Color get_random_color();
 

@@ -23,8 +23,8 @@ set(SHARED_SOURCES
         Models/messenger.cpp
         Models/messenger.h
 
-        Utility/OperationCodes.cpp
-        Utility/OperationCodes.h
+        Utility/constants.cpp
+        Utility/constants.h
 
         Models/wheel.cpp
         Models/wheel.h

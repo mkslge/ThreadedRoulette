@@ -16,11 +16,11 @@ class clientinfo {
     int balance;
 public:
     clientinfo();
-    clientinfo(int starting_balance);
-    int get_balance();
+    explicit clientinfo(int starting_balance);
+    int get_balance() const;
     void add_balance(int amount);
     void remove_balance(int amount);
-    bool sufficient_balance(int bet_amount) const;
+    [[nodiscard]] bool sufficient_balance(int bet_amount) const;
 };
 
 

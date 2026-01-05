@@ -24,14 +24,14 @@ void init_thread(Messenger server, int thread_num) {
 
             if (client_won) {
                 std::cout << "Bet won..." << std::endl;
-                std::string response_string = std::string(1, OperationCodes::WIN_CODE) +
+                std::string response_string = std::string(1, constants::WIN_CODE) +
                     " " + std::to_string(curr_bet.get_amount());
                 response = response_string.c_str();
                 server.send_to_client(response);
             } else {
 
                 std::cout << "Bet lost ):" << std::endl;
-                std::string response_string = std::string(1, OperationCodes::LOSS_CODE) +
+                std::string response_string = std::string(1, constants::LOSS_CODE) +
                     " " + std::to_string(curr_bet.get_amount());
                 response = response_string.c_str();
                 server.send_to_client(response);

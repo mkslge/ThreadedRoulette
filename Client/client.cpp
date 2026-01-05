@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "../Models/messenger.h"
-#include "../Utility/OperationCodes.h"
+#include "../Utility/constants.h"
 #include "../Utility/utility.h"
 #include "clientutility.h"
 #include "../Models/bet.h"
@@ -19,7 +19,7 @@
 
 int main() {
     Messenger messenger(CLIENT);
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::seconds(constants::STARTUP_TIME));
     std::cout << "Attempting to join server..." << std::endl;
     messenger.send("j");
 
@@ -66,13 +66,8 @@ int main() {
             Wheel wheel(result_is_win(server_response));
             wheel.spin();
 
-
-
-
             client.add_balance(bet_result);
             std::cout << "Your current balance is now " << client.get_balance() << std::endl;
-
-
         }
 
 
@@ -80,12 +75,5 @@ int main() {
 
         BET_RESULT_RECEIVED = false;
     }
-
-
-
-
-
-
-
     return 0;
 }

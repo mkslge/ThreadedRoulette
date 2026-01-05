@@ -44,13 +44,13 @@ std::map<char, Color> get_outcome_map() {
 bool is_join_message(std::string msg) {
     msg = string_to_lower(msg);
 
-    return !msg.empty() && msg[0] == OperationCodes::JOIN_CODE;
+    return !msg.empty() && msg[0] == constants::JOIN_CODE;
 }
 
 bool is_exit_message(std::string msg) {
     msg = string_to_lower(msg);
 
-    return !msg.empty() && msg[0] == OperationCodes::EXIT_CODE;
+    return !msg.empty() && msg[0] == constants::EXIT_CODE;
 }
 
 

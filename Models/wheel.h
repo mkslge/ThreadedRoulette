@@ -7,11 +7,11 @@
 
 #include <vector>
 #include "../Utility/utility.h"
-#include "../Utility/OperationCodes.h"
+#include "../Utility/constants.h"
 #include <set>
 #include <string>
 
-inline int WHEEL_SIZE = 12;
+
 
 class Wheel {
 private:

@@ -4,17 +4,17 @@
 
 #include "outcome.h"
 
-static const std::unordered_set<int> red_numbers = {
-    1,3,5,7,9,12,14,16,18,
-    19,21,23,25,27,30,32,34,36
-};
+#include "../Utility/constants.h"
+
 
 Outcome::Outcome(Color color, int value) : color(color), value(value) {
 
 }
+
 Outcome::Outcome() : color(Color::GREEN), value(-1) {
 
 }
+
 
 
 Outcome::Outcome(const Outcome& other) {
@@ -22,11 +22,11 @@ Outcome::Outcome(const Outcome& other) {
     this->value = other.value;
 }
 
-Color Outcome::get_color() {
+Color Outcome::get_color() const {
     return color;
 }
 
-int Outcome::get_value() {
+int Outcome::get_value() const {
     return value;
 }
 
@@ -36,21 +36,21 @@ bool Outcome::operator==(Outcome other) {
 
 
 
-std::string Outcome::to_string() {
+std::string Outcome::to_string() const {
     return "Color: " + color_to_string(color) + ", Value: " + std::to_string(value);
 }
 
 
 int get_random_roulette_number() {
-    return rand() % 37;
+    return rand() % constants::ROULETTE_SIZE;
 }
 
 
 Outcome Outcome::generate_random_outcome() {
     int random_number = get_random_roulette_number();
 
-    if (random_number == 0) {
-        return {Color::GREEN, 0};
+    if (random_number == constants::GREEN_VALUE) {
+        return {Color::GREEN, constants::GREEN_VALUE};
     }
 
     Color resulting_color = red_numbers.contains(random_number) ? Color::RED : Color::BLACK;

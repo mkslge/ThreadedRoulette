@@ -11,10 +11,10 @@
 #include <string>
 #include "../Utility/utility.h"
 #include <chrono>
-#include "../Utility/OperationCodes.h"
+#include "../Utility/constants.h"
 #include <thread>
 
-inline int SERVER_STARTING_BALANCE = 10000;
+
 
 inline Outcome global_winning_outcome;
 inline std::vector<std::thread> threads;
